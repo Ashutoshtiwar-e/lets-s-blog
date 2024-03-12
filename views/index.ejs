@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <title>Blog App</title>
+</head>
+<body>
+  <h1>Let,s Blog</h1>
+  <form id="createBlog" action="/create-post" method="post">
+    <label for="title">Title:</label>
+    <input type="text" class="create-title" id="title" name="title" required>
+    <br>
+    <label for="content">Content:</label>
+    <textarea id="content" class="create-content" name="content" required></textarea>
+    <br>
+    <button type="submit">Create Post</button>
+  </form>
+  <% posts.forEach((post, index) => { %>
+    <div class="post">
+      <div class="createdContent">
+        <h2><%= post.title %></h2>
+        <p><%= post.content %></p>
+      </div>
+      <form action="/update-post/<%= index %>" method="post">
+        <label for="title<%= index %>">Title:</label>
+        <input type="text" id="title<%= index %>" name="title" value="<%= post.title %>" required>
+        <br>
+        <label for="content<%= index %>">Content:</label>
+        <textarea id="content<%= index %>" name="content" required><%= post.content %></textarea>
+        <br>
+        <button type="submit">Update Post</button>
+      </form>
+      <form action="/delete-post/<%= index %>" method="post">
+        <button type="submit">Delete Post</button>
+      </form>
+    </div>
+  <% }); %>
+</body>
+</html>
